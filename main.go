@@ -14,7 +14,7 @@ func main() {
 	fmt.Printf("\ninfo=helloworld started\n")
 	addr = parseAddress(os.Args)
 
-	http.HandleFunc("/", hello)
+	http.HandleFunc("/", helloWorld)
 
 	ch := make(chan error, 1)
 	go func() {
@@ -36,10 +36,10 @@ func main() {
 	fmt.Println("info=helloworld stopped\n")
 }
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("hello handler called from %s", r.RemoteAddr)
+func helloWorld(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("info=helloworld handler called from %s\n", r.RemoteAddr)
 	if _, err := fmt.Fprintln(w, "Hello world"); err != nil {
-		fmt.Println("hello write error", err)
+		fmt.Println("err=helloworld handler write error", err)
 	}
 }
 
