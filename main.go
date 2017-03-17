@@ -19,13 +19,13 @@ const (
 
 // log messages
 const (
-	started          = "info=helloworld started"
-	stopped          = "info=helloworld stopped"
-	stoppedWithError = "err=helloworld server stopped with error:"
-	running          = "info=helloworld listens on address %s\n"
-	gotStopSignal    = "\ninfo=helloworld got signal %s\n"
-	calledFrom       = "info=helloworld called from %s\n"
-	writeError       = "err=helloworld handler write error"
+	started          = "info=started app=helloworld"
+	stopped          = "info=stopped app=helloworld"
+	stoppedWithError = "err=%s app=helloworld\n"
+	running          = "info=listens on address %s app=helloworld\n"
+	gotStopSignal    = "\ninfo=got signal %s app=helloworld\n"
+	calledFrom       = "info=called from %s app=helloworld\n"
+	writeError       = "err=handler got: %s app=helloworld"
 )
 
 func main() {
@@ -52,14 +52,14 @@ func run(args []string, log io.Writer) bool {
 
 	select {
 	case err := <-ch:
-		fmt.Fprintln(log, stoppedWithError, err)
+		fmt.Fprintf(log, stoppedWithError, err)
+		fmt.Fprintln(log, stopped)
 		return false
 	case sig := <-wait():
 		fmt.Fprintf(log, gotStopSignal, sig)
+		fmt.Fprintln(log, stopped)
+		return true
 	}
-
-	fmt.Fprintln(log, stopped)
-	return true
 }
 
 func helloWorld(log io.Writer) func(w http.ResponseWriter, r *http.Request) {
