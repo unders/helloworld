@@ -24,8 +24,8 @@ const (
 	stoppedWithError = "err=%s app=helloworld\n"
 	running          = "info=listens on address %s app=helloworld\n"
 	gotStopSignal    = "\ninfo=got signal %s app=helloworld\n"
-	calledFrom       = "info=called from %s app=helloworld\n"
-	writeError       = "err=handler got: %s app=helloworld"
+	calledFrom       = "info=handler called from %s app=helloworld\n"
+	writeError       = "err=%s app=helloworld\n"
 )
 
 func main() {
@@ -68,7 +68,7 @@ func helloWorld(log io.Writer) func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(log, calledFrom, r.RemoteAddr)
 
 		if _, err := fmt.Fprintln(w, reply); err != nil {
-			fmt.Fprintln(log, writeError, err)
+			fmt.Fprintf(log, writeError, err)
 		}
 	}
 }
