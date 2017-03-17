@@ -23,7 +23,7 @@ const (
 	stopped          = "info=helloworld stopped"
 	stoppedWithError = "err=helloworld server stopped with error:"
 	running          = "info=helloworld listens on address %s\n"
-	gotSignal        = "\ninfo=helloworld got signal %s\n"
+	gotStopSignal    = "\ninfo=helloworld got signal %s\n"
 	calledFrom       = "info=helloworld called from %s\n"
 	writeError       = "err=helloworld handler write error"
 )
@@ -55,7 +55,7 @@ func run(args []string, log io.Writer) bool {
 		fmt.Fprintln(log, stoppedWithError, err)
 		return false
 	case sig := <-wait():
-		fmt.Fprintf(log, gotSignal, sig)
+		fmt.Fprintf(log, gotStopSignal, sig)
 	}
 
 	fmt.Fprintln(log, stopped)
@@ -81,7 +81,7 @@ func parseAddress(args []string) string {
 	return args[1]
 }
 
-// Interrupt returns an os.Signal chan that waits for these signals:
+// waits returns an os.Signal chan that waits for these signals:
 //
 //      * SIGTERM   - request for termination (process can release its resources).
 //      * SIGINT    - sent from terminal when it wishes to interrupt the process.
