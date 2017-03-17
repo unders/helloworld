@@ -2,19 +2,43 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
+// default address for the server
 var addr = "localhost:8080"
 
-func main() {
-	fmt.Printf("\ninfo=helloworld started\n")
-	addr = parseAddress(os.Args)
+// reply message
+const (
+	reply = "Hello world"
+)
 
-	http.HandleFunc("/", helloWorld)
+// log messages
+const (
+	started          = "info=helloworld started"
+	stopped          = "info=helloworld stopped"
+	stoppedWithError = "err=helloworld server stopped with error:"
+	running          = "info=helloworld listens on address %s\n"
+	gotSignal        = "\ninfo=helloworld got signal %s\n"
+	calledFrom       = "info=helloworld called from %s\n"
+	writeError       = "err=helloworld handler write error"
+)
+
+func main() {
+	if ok := run(os.Args, os.Stdout); !ok {
+		os.Exit(1)
+	}
+}
+
+func run(args []string, log io.Writer) bool {
+	fmt.Println(started)
+	addr = parseAddress(args)
+
+	http.HandleFunc("/", helloWorld(log))
 
 	ch := make(chan error, 1)
 	go func() {
@@ -24,22 +48,28 @@ func main() {
 		close(ch)
 	}()
 
-	fmt.Printf("info=listens on address %s\n", addr)
+	fmt.Fprintf(log, running, addr)
 
 	select {
 	case err := <-ch:
-		fmt.Println("err=server stopped with error:", err)
+		fmt.Fprintln(log, stoppedWithError, err)
+		return false
 	case sig := <-wait():
-		fmt.Printf("\ninfo=got signal %s\n", sig)
+		fmt.Fprintf(log, gotSignal, sig)
 	}
 
-	fmt.Println("info=helloworld stopped\n")
+	fmt.Fprintln(log, stopped)
+	return true
 }
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("info=helloworld handler called from %s\n", r.RemoteAddr)
-	if _, err := fmt.Fprintln(w, "Hello world"); err != nil {
-		fmt.Println("err=helloworld handler write error", err)
+func helloWorld(log io.Writer) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		fmt.Fprintf(log, calledFrom, r.RemoteAddr)
+
+		if _, err := fmt.Fprintln(w, reply); err != nil {
+			fmt.Fprintln(log, writeError, err)
+		}
 	}
 }
 
