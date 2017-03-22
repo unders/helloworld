@@ -8,7 +8,7 @@ bootstrap:
 
 .PHONY: install
 install:
-	@go install github.com/unders/helloworld
+	@go install github.com/unders/helloworld/cmd/helloworld
 
 .PHONY: run
 run: install

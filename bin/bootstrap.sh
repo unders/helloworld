@@ -6,38 +6,12 @@
 ##        * Docker
 ##        * Google Cloud Platform
 ##        * Python 2.7
-##        * Bazel
-##        * Java JDK8
 ##
 
 command_exists () {
     type "$1" &> /dev/null ;
 }
 
-java_jdk8_is_required() {
-    if command_exists java; then
-        return
-    fi
-
-    echo ""
-    echo "You must install Java JDK 8:"
-    echo "    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"
-    echo "    Look for 'Mac OS X x64' under 'Java SE Development Kit'"
-    echo "    This will download a DMG image with an install wizard."
-    echo ""
-}
-
-bazel_is_required() {
-    if command_exists bazel; then
-        return
-    fi
-
-    echo ""
-    echo "Installing Bazel:"
-    echo "    https://bazel.build/versions/master/docs/install.html#mac-os-x"
-    brew install bazel
-    echo ""
-}
 
 go_is_required() {
     if command_exists go; then
@@ -94,8 +68,6 @@ gcp_sdk_is_required() {
 
 
 main() {
-    java_jdk8_is_required
-    bazel_is_required
     go_is_required
     docker_is_required
     python_is_required
