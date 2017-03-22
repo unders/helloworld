@@ -9,6 +9,17 @@ import (
 	"syscall"
 )
 
+var (
+	// Version the version of the prog.
+	Version = "No Version Provided"
+
+	// Buildstamp the time the prog was built.
+	Buildstamp = "No Buildstamp provided"
+
+	// Githash the git commit hash
+	Githash = "No Githash provided"
+)
+
 // default address for the server
 var addr = "localhost:8080"
 
@@ -20,6 +31,7 @@ const (
 // log messages
 const (
 	started          = "info=started app=helloworld"
+	release          = "info=version:%s buildstamp:%s githash:%s app=helloworld\n"
 	stopped          = "info=stopped app=helloworld"
 	stoppedWithError = "err=%s app=helloworld\n"
 	running          = "info=listens on address %s app=helloworld\n"
@@ -35,7 +47,8 @@ func main() {
 }
 
 func run(args []string, log io.Writer) bool {
-	fmt.Println(started)
+	fmt.Fprintln(log, started)
+	fmt.Fprintf(log, release, Version, Buildstamp, Githash)
 	addr = parseAddress(args)
 
 	http.HandleFunc("/", helloWorld(log))
