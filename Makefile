@@ -1,19 +1,20 @@
 .PHONY: help
 help:
-	@cat Makefile
+	@echo ""
+	@echo "A guide on how to:"
+	@echo "    - develop microservices"
+	@echo "    - and deploy them to Google Container Engine"
+	@echo ""
+	@echo "Commands:"
+	@echo "    make bootstrap     # check required dependencies"
+	@echo "    make xxxxx         # next"
+	@echo ""
+	@echo "Tutorial"
+	@echo "    Step 1. $ make bootstrap"
+	@echo ""
 
 .PHONY: bootstrap
 bootstrap:
 	@./bin/bootstrap.sh
 
-.PHONY: install
-install:
-	@go install github.com/unders/helloworld/cmd/helloworld
 
-.PHONY: run
-run: install
-	@helloworld
-
-.PHONY: push
-push:
-	@git push
