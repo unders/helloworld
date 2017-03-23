@@ -21,7 +21,7 @@ var (
 )
 
 // default address for the server
-var addr = "localhost:8080"
+var addr = "0.0.0.0:8080"
 
 // reply message
 const (

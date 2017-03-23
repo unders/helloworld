@@ -15,6 +15,9 @@ help:
 	@echo "    make list          # shows $(IMAGE) containers and images"
 	@echo "    make start         # starts $(IMAGE) container"
 	@echo "    make stop          # stops $(IMAGE) container"
+	@echo "    make log           # show log for running container"
+	@echo "    make tail          # tails log for running container"
+	@echo "    make status        # do request against the running container"
 	@echo "    make clean         # stops $(IMAGE); removes its containers and images"
 	@echo ""
 
@@ -48,12 +51,24 @@ list:
 .PHONY: start
 start:
 	docker run -p 8080:8080 -d $(IMAGE)
-	docker ps | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+	docker ps -l | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
 
 .PHONY: stop
 stop:
 	docker ps | grep $(PROG) | awk '{print $$1}' | xargs docker stop
-	docker ps -al | grep $(PROG):$(VERSION) | awk '{print $$1}' | xargs docker logs
+	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+
+.PHONY: log
+log:
+	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+
+.PHONY: tail
+tail:
+	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -ft
+
+.PHONY: status
+status:
+	curl http://localhost:8080
 
 .PHONY: clean
 clean:
