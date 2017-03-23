@@ -20,7 +20,7 @@ help:
 	@echo "    make build         # builds a docker image"
 	@echo "    make test          # runs the tests"
 	@echo "    make lint          # runs a linter on the source code"
-	@echo "    make list          # show containers and images"
+	@echo "    make list          # shows containers and images"
 	@echo "    make start         # starts container"
 	@echo "    make stop          # stops container"
 	@echo "    make run           # runs the go binary"
@@ -34,9 +34,10 @@ help:
 	@echo "    health             # health=:10181"
 	@echo ""
 	@echo "Examples:"
-	@echo "    http=:10180 health=:10181 make run"
+	@echo "    make start"
 	@echo "    http=:10180 health=:10181 make start"
 	@echo "    http=:10180 health=:10181 make check"
+	@echo "    http=:10180 health=:10181 make run"
 	@echo ""
 
 .PHONY: build
