@@ -19,7 +19,7 @@ help:
 	@echo "    make stop          # stops container"
 	@echo "    make log           # show log for running container"
 	@echo "    make tail          # tails log for running container"
-	@echo "    make status        # do requests against the running container"
+	@echo "    make check         # do requests against the running container"
 	@echo "    make clean         # stops the container and removes it and its image"
 	@echo ""
 
@@ -68,8 +68,8 @@ log:
 tail:
 	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -f --tail 10
 
-.PHONY: status
-status:
+.PHONY: check
+check:
 	curl http://localhost:8080
 
 .PHONY: clean
