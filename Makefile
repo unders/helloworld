@@ -1,7 +1,7 @@
 .PHONY: help
 help:
 	@echo ""
-	@echo "A guide on how to:"
+	@echo "This is a guide on how to:"
 	@echo "    - develop microservices"
 	@echo "    - and deploy them to Google Container Engine"
 	@echo ""
