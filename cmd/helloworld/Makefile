@@ -1,5 +1,6 @@
 VERSION=0.0.2
 PROG=helloworld
+IMAGE=$(PROG):$(VERSION)
 MAIN_VERSION="main.Version=v$(VERSION)"
 BUILDSTAMP="main.Buildstamp=$(shell date -u '+%Y-%m-%dT%I:%M%p')"
 GITHASH="main.Githash=$(shell git rev-parse HEAD)"
@@ -8,11 +9,13 @@ LDFLAGS=-ldflags "-X $(MAIN_VERSION) -X $(BUILDSTAMP) -X $(GITHASH)"
 .PHONY: help
 help:
 	@echo ""
-	@echo "    make build         # builds docker image: $(PROG):$(VERSION)"
+	@echo "    make build         # builds docker image: $(IMAGE)"
 	@echo "    make test          # runs the tests for the program"
 	@echo "    make lint          # runs the linter on the source code"
-	@echo "    make list          # shows $(PROG) containers and images"
-	@echo "    make clean         # stops $(PROG); removes its containers and images"
+	@echo "    make list          # shows $(IMAGE) containers and images"
+	@echo "    make start         # starts $(IMAGE) container"
+	@echo "    make stop          # stops $(IMAGE) container"
+	@echo "    make clean         # stops $(IMAGE); removes its containers and images"
 	@echo ""
 
 .PHONY: build
@@ -39,8 +42,18 @@ lint:
 .PHONY: list
 list:
 	docker ps | grep $(PROG) || true
-	docker ps | grep $(PROG) || true
+	docker ps -a | grep $(PROG) || true
 	docker images $(PROG)
+
+.PHONY: start
+start:
+	docker run -p 8080:8080 -d $(IMAGE)
+	docker ps | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+
+.PHONY: stop
+stop:
+	docker ps | grep $(PROG) | awk '{print $$1}' | xargs docker stop
+	docker ps -al | grep $(PROG):$(VERSION) | awk '{print $$1}' | xargs docker logs
 
 .PHONY: clean
 clean:
