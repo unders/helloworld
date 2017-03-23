@@ -69,13 +69,14 @@ list:
 
 .PHONY: start
 start:
-	docker run -p $(httpPort):80 -d $(IMAGE)
+	docker run -p $(httpPort):80 --name $(PROG) -d $(IMAGE)
 	docker ps -l | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
 
 .PHONY: stop
 stop:
 	docker ps | grep $(PROG) | awk '{print $$1}' | xargs docker stop
 	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+	@docker ps -a  | grep $(IMAGE) | awk '{print $$1}' | xargs docker rm
 
 .PHONY: run
 run:
