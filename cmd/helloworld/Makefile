@@ -9,25 +9,27 @@ LDFLAGS=-ldflags "-X $(MAIN_VERSION) -X $(BUILDSTAMP) -X $(GITHASH)"
 .PHONY: help
 help:
 	@echo ""
-	@echo "    make build         # builds docker image: $(IMAGE)"
-	@echo "    make test          # runs the tests for the program"
-	@echo "    make lint          # runs the linter on the source code"
-	@echo "    make list          # shows $(IMAGE) containers and images"
-	@echo "    make start         # starts $(IMAGE) container"
-	@echo "    make stop          # stops $(IMAGE) container"
+	@echo "    Program            # $(PROG) v$(VERSION)"
+	@echo ""
+	@echo "    make build         # builds a docker image"
+	@echo "    make test          # runs the tests"
+	@echo "    make lint          # runs a linter on the source code"
+	@echo "    make list          # show containers and images"
+	@echo "    make start         # starts container"
+	@echo "    make stop          # stops container"
 	@echo "    make log           # show log for running container"
 	@echo "    make tail          # tails log for running container"
 	@echo "    make status        # do requests against the running container"
-	@echo "    make clean         # stops $(IMAGE); removes its containers and images"
+	@echo "    make clean         # stops the container and removes it and its image"
 	@echo ""
 
 .PHONY: build
 build: test lint
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS)
 	@file $(PROG)
-	docker build -t $(PROG):$(VERSION) .
+	docker build -t $(IMAGE) .
 	@rm $(PROG)
-	@docker images $(PROG)
+	@docker images $(IMAGE)
 
 .PHONY: test
 test:
@@ -60,11 +62,11 @@ stop:
 
 .PHONY: log
 log:
-	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
 
 .PHONY: tail
 tail:
-	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -f
+	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -f --tail 10
 
 .PHONY: status
 status:
