@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
@@ -21,7 +22,7 @@ var (
 )
 
 // default address for the server
-var addr = "0.0.0.0:8080"
+var addr = "0.0.0.0:80"
 
 // reply message
 const (
@@ -87,11 +88,12 @@ func helloWorld(log io.Writer) func(w http.ResponseWriter, r *http.Request) {
 }
 
 func parseAddress(args []string) string {
-	if len(args) == 1 {
-		return addr
-	}
-
-	return args[1]
+	var (
+		httpAddr = flag.String("http", "0.0.0.0:80", "HTTP service address.")
+		// healthAddr = flag.String("health", "0.0.0.0:81", "Health service address.")
+	)
+	flag.Parse()
+	return *httpAddr
 }
 
 // waits returns an os.Signal chan that waits for these signals:

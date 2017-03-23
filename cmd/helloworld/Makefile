@@ -6,10 +6,17 @@ BUILDSTAMP="main.Buildstamp=$(shell date -u '+%Y-%m-%dT%I:%M%p')"
 GITHASH="main.Githash=$(shell git rev-parse HEAD)"
 LDFLAGS=-ldflags "-X $(MAIN_VERSION) -X $(BUILDSTAMP) -X $(GITHASH)"
 
+http?=":10080"
+httpAddr=$(http)
+httpPort=$(shell echo "$(http)" | sed 's/\://g')
+health?=":10081"
+
 .PHONY: help
 help:
 	@echo ""
-	@echo "    Program            # $(PROG) v$(VERSION)"
+	@echo "** $(PROG) v$(VERSION)"
+	@echo ""
+	@echo "Commands:"
 	@echo ""
 	@echo "    make build         # builds a docker image"
 	@echo "    make test          # runs the tests"
@@ -17,10 +24,22 @@ help:
 	@echo "    make list          # show containers and images"
 	@echo "    make start         # starts container"
 	@echo "    make stop          # stops container"
+	@echo "    make run           # runs the go binary"
 	@echo "    make log           # show log for running container"
 	@echo "    make tail          # tails log for running container"
 	@echo "    make check         # do requests against the running container"
 	@echo "    make clean         # stops the container and removes it and its image"
+	@echo ""
+	@echo  "Args (start, run, check):"
+	@echo  ""
+	@echo  "   http               # http=:10180"
+	@echo  "   health             # health=:10181"
+	@echo  ""
+	@echo "Examples:"
+	@echo ""
+	@echo "    http=:10180 health=:10181 make run"
+	@echo "    http=:10180 health=:10181 make start"
+	@echo "    http=:10180 health=:10181 make check"
 	@echo ""
 
 .PHONY: build
@@ -52,13 +71,17 @@ list:
 
 .PHONY: start
 start:
-	docker run -p 8080:8080 -d $(IMAGE)
+	docker run -p $(httpPort):80 -d $(IMAGE)
 	docker ps -l | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
 
 .PHONY: stop
 stop:
 	docker ps | grep $(PROG) | awk '{print $$1}' | xargs docker stop
 	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+
+.PHONY: run
+run:
+	go install && $(PROG) -http=$(httpAddr)
 
 .PHONY: log
 log:
@@ -70,7 +93,7 @@ tail:
 
 .PHONY: check
 check:
-	curl http://localhost:8080
+	curl http://localhost:$(httpPort)
 
 .PHONY: clean
 clean:
