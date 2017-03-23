@@ -22,3 +22,7 @@ You can also start it with another address:
 helloworld 0.0.0.0:80
 ````
 
+
+### Links
+* [GCP - load-balancing/ipv6](https://cloud.google.com/compute/docs/load-balancing/ipv6)
+

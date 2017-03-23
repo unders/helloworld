@@ -17,7 +17,7 @@ help:
 	@echo "    make stop          # stops $(IMAGE) container"
 	@echo "    make log           # show log for running container"
 	@echo "    make tail          # tails log for running container"
-	@echo "    make status        # do request against the running container"
+	@echo "    make status        # do requests against the running container"
 	@echo "    make clean         # stops $(IMAGE); removes its containers and images"
 	@echo ""
 
@@ -64,7 +64,7 @@ log:
 
 .PHONY: tail
 tail:
-	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -ft
+	@docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs -f
 
 .PHONY: status
 status:
