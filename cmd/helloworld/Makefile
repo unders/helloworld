@@ -75,7 +75,7 @@ start:
 .PHONY: stop
 stop:
 	docker ps | grep $(PROG) | awk '{print $$1}' | xargs docker stop
-	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs
+	docker ps -al | grep $(IMAGE) | awk '{print $$1}' | xargs docker logs --tail 20
 	@docker ps -a  | grep $(IMAGE) | awk '{print $$1}' | xargs docker rm
 
 .PHONY: run
