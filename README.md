@@ -18,7 +18,7 @@ This guide builds upon this Udacity course:
 ```
 $ mkdir -p $GOPATH/src/github.com/unders/
 $ cd $GOPATH/src/github.com/unders/
-$ git clone https://github.com/unders/helloworld
+$ git clone git@github.com:unders/helloworld.git
 $ cd helloworld
 $ make               # and follow the steps in the tutorial
 ```
