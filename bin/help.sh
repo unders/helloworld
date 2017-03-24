@@ -8,10 +8,14 @@ main() {
 	echo ""
 	echo "Commands:"
 	echo "    make bootstrap     # checks required dependencies"
-	echo "    make xxxxx         # next"
+	echo "    make account       # create GCE account and setups"
 	echo ""
 	echo "Tutorial"
-	echo "    Step 1) make bootstrap"
+	echo ""
+	echo "    [ Enter ]       # Press Enter key to go to next section"
+	echo ""
+	echo "    1) make bootstrap"
+	echo "    2) make account"
 	echo ""
 }
 

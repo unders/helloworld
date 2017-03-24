@@ -6,4 +6,8 @@ help:
 bootstrap:
 	@./bin/bootstrap.sh
 
+.PHONY: account
+account:
+	@./bin/account.sh
+
 

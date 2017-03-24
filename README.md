@@ -41,7 +41,15 @@ $ make               # and follow the steps in the tutorial
 * [Microservices - a definition of this new architectural term](https://martinfowler.com/articles/microservices.html)
 
 ### Videos
+* [GOTO 2014 • Microservices • Martin Fowler](https://www.youtube.com/watch?v=wgdBVIX9ifA)
 * [Orchestrating with Kubernetes - 2016](https://www.youtube.com/watch?v=21hXNReWsUU)
+* [The State of the Art in Microservices by Adrian Cockcroft - 2015](https://www.youtube.com/watch?v=pwpxq9-uw_0)
+
+### Tools
+* [Go](https://golang.org/)
+* [Docker](https://www.docker.com/)
+* [Kubernetes](https://kubernetes.io/)
+* [Google Container Engine (GKE) - a hosted Kubernetes service](https://cloud.google.com/container-engine/)
 
 ## Google Cloud Platform
 * [Google Container Engine](https://cloud.google.com/container-engine/)
