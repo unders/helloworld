@@ -10,4 +10,8 @@ bootstrap:
 account:
 	@./bin/account.sh
 
+.PHONY: deploy
+deploy:
+	@./bin/deploy.sh
+
 

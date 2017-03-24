@@ -16,6 +16,7 @@ main() {
 	echo ""
 	echo "    1) make bootstrap"
 	echo "    2) make account"
+	echo "    3) make deploy"
 	echo ""
 }
 

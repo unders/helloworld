@@ -11,18 +11,18 @@ We build a [Go](https://golang.org/) web server that replies: "Hello world" and 
 #### Intro Course
 This guide builds upon this Udacity course:
 * [Scalable Microservices with Kubernetes - ud615](https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615)
+* [My Repo](https://github.com/unders/udacity-kubernetes)
 
 
 ## Tutorial
 
 ```
-$ mkdir -p $GOPATH/src/github.com/unders/
-$ cd $GOPATH/src/github.com/unders/
-$ git clone git@github.com:unders/helloworld.git
+$ mkdir -p $GOPATH/src/github.com/unders
+$ cd $GOPATH/src/github.com/unders
+$ git clone https://github.com/unders/helloworld
 $ cd helloworld
 $ make               # and follow the steps in the tutorial
 ```
-
 
 ## Resources
 
@@ -54,6 +54,7 @@ $ make               # and follow the steps in the tutorial
 ## Google Cloud Platform
 * [Google Container Engine](https://cloud.google.com/container-engine/)
 * [GCP - load-balancing/ipv6](https://cloud.google.com/compute/docs/load-balancing/ipv6)
+* [Google Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials)
 
 ### ???
  * Deployment Manager

@@ -40,10 +40,60 @@ enable_API() {
     echo ""
 }
 
+login() {
+    echo ""
+    echo "## Login to Google Cloud Platform"
+    echo ""
+    echo "Write:"
+    echo "        gcloud auth login"
+    echo ""
+    read -n 1 -p "[ Enter ] " input
+    echo ""
+}
+
+create_configuration() {
+    echo ""
+    echo "## Create configuration"
+    echo ""
+    echo "Write:"
+    echo "        gcloud init"
+    echo ""
+    echo "Useful Commands:"
+    echo ""
+    echo "        gcloud topic configurations        # show information about configuration"
+    echo "        gcloud config list                 # lists active configuration"
+    echo "        gcloud config configurations list  # list available configurations"
+    echo "        gcloud config configurations --help"
+    echo "        gcloud info"
+    echo ""
+    read -n 1 -p "[ Enter ] " input
+    echo ""
+}
+
+create_kubernetes_cluster() {
+    echo ""
+    echo "## Create Container cluster"
+    echo ""
+    echo "Write:"
+    echo "        gcloud container clusters create k0"
+    echo ""
+    echo "Useful Commands:"
+    echo ""
+    echo "        gcloud container clusters list"
+    echo "        kubectl config view"
+    echo "        kubectl --help"
+    echo ""
+    read -n 1 -p "[ Enter ] " input
+    echo ""
+}
+
 main() {
     create_gce_account
     create_project
     enable_API
+    login
+    create_configuration
+    create_kubernetes_cluster
 }
 
 main
