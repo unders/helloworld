@@ -30,6 +30,17 @@ $ make               # and follow the steps in the tutorial
  * [@kelseyhightower](https://twitter.com/kelseyhightower)
  * [@_askcarter](https://twitter.com/_askcarter)
 
+### Repos
+* [kelseyhightower/gke-service-accounts-tutorial](https://github.com/kelseyhightower/gke-service-accounts-tutorial)
+* [kelseyhightower/gif-maker](https://github.com/kelseyhightower/gif-maker)
+* [kelseyhightower/gif-maker-infrastructure](https://github.com/kelseyhightower/gif-maker-infrastructure)
+* [kelseyhightower/kubernetes-cluster-federation](https://github.com/kelseyhightower/kubernetes-cluster-federation)
+* [kelseyhightower/craft-kubernetes-workshop](https://github.com/kelseyhightower/craft-kubernetes-workshop)
+* [kelseyhightower/google-cloud-next-17](https://github.com/kelseyhightower/google-cloud-next-17)
+* [kelseyhightower/kube-cert-manager](https://github.com/kelseyhightower/kube-cert-manager)
+* [kelseyhightower/cross-gke-cluster-networking](https://github.com/kelseyhightower/cross-gke-cluster-networking)
+* [kelseyhightower/app - 12 factor](https://github.com/kelseyhightower/app)
+
 ### Books
  * [Kubernetes: Up and Running - 2015](http://shop.oreilly.com/product/0636920043874.do)
  * [Building Microservices - 2015](http://shop.oreilly.com/product/0636920033158.do)
@@ -50,6 +61,10 @@ $ make               # and follow the steps in the tutorial
 * [Docker](https://www.docker.com/)
 * [Kubernetes](https://kubernetes.io/)
 * [Google Container Engine (GKE) - a hosted Kubernetes service](https://cloud.google.com/container-engine/)
+
+## Kubernetes
+* [running-mongodb-on-kubernetes-with-statefulsets](http://blog.kubernetes.io/2017/01/running-mongodb-on-kubernetes-with-statefulsets.html)
+* [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## Google Cloud Platform
 * [Google Container Engine](https://cloud.google.com/container-engine/)

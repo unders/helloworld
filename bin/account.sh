@@ -17,29 +17,6 @@ create_gce_account() {
     echo ""
 }
 
-create_project() {
-    echo ""
-    echo "## Create a Project"
-    echo "    A GCP project is required."
-    echo ""
-    echo "    * Help: https://support.google.com/cloud/answer/6251787"
-    echo "    * Console: https://console.cloud.google.com"
-    echo ""
-    read -n 1 -p "[ Enter ] " input
-    echo ""
-}
-
-enable_API() {
-    echo ""
-    echo "## Enable APIs"
-    echo "    Container Engine API must be enabled."
-    echo ""
-    echo "    * Console: https://console.cloud.google.com"
-    echo ""
-    read -n 1 -p "[ Enter ] " input
-    echo ""
-}
-
 login() {
     echo ""
     echo "## Login to Google Cloud Platform"
@@ -50,6 +27,35 @@ login() {
     read -n 1 -p "[ Enter ] " input
     echo ""
 }
+
+create_project() {
+    echo ""
+    echo "## Create a Project"
+    echo "    A GCP project is required."
+    echo ""
+    echo "    * Help: https://support.google.com/cloud/answer/6251787"
+    echo "    * Console: https://console.cloud.google.com"
+    echo ""
+    echo "Write:"
+    echo "       gcloud projects create --name="helloworld" --set-as-default"
+    echo ""
+    read -n 1 -p "[ Enter ] " input
+    echo ""
+}
+
+enable_API() {
+    echo ""
+    echo "## Enable Billing and APIs for this project"
+    echo "    - Enable billing"
+    echo "    - Container Engine API must be enabled."
+    echo ""
+    echo "    * Console: https://console.cloud.google.com"
+    echo ""
+    read -n 1 -p "[ Enter ] " input
+    echo ""
+}
+
+
 
 create_configuration() {
     echo ""
@@ -89,9 +95,9 @@ create_kubernetes_cluster() {
 
 main() {
     create_gce_account
+    login
     create_project
     enable_API
-    login
     create_configuration
     create_kubernetes_cluster
 }
