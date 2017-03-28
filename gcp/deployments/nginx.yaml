@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+        track: stable # canary
+        environment: dev # prod,
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.91
+        ports:
+        - containerPort: 80

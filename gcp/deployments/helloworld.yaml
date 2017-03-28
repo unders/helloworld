@@ -1,0 +1,12 @@
+# https://kubernetes.io/docs/user-guide/deployments/
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld
+  spec:
+     replicas: 1
+     te
+     labels:
+        app: guestbook
+        tier: frontend
+        track: stable

@@ -31,6 +31,7 @@ $ make               # and follow the steps in the tutorial
  * [@_askcarter](https://twitter.com/_askcarter)
 
 ### Repos
+* [](https://github.com/GoogleCloudPlatform/golang-samples/tree/master/appengine_flexible/endpoints/)
 * [kelseyhightower/gke-service-accounts-tutorial](https://github.com/kelseyhightower/gke-service-accounts-tutorial)
 * [kelseyhightower/gif-maker](https://github.com/kelseyhightower/gif-maker)
 * [kelseyhightower/gif-maker-infrastructure](https://github.com/kelseyhightower/gif-maker-infrastructure)

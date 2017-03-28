@@ -10,10 +10,11 @@ deploy_nginx() {
     echo "    kubectl get services"
     echo "    kubectl expose deployment nginx --port 80 --type LoadBalancer"
     echo "    kubectl get services"
-    echo "    curl -I 35.187.5.84"
-    echo "    curl 35.187.5.84"
+    echo "    curl -I EXTERNAL-IP"
+    echo "    curl EXTERNAL-IP"
     echo ""
-
+    read -n 1 -p "[ Enter ] " input
+    echo ""
 }
 
 main() {
